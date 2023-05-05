@@ -1,14 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pod_player/pod_player.dart';
 import 'package:the_technology_maker/constants/asset_constants.dart';
 import 'package:the_technology_maker/constants/color_constants.dart';
 import 'package:the_technology_maker/constants/string_constants.dart';
 import 'package:the_technology_maker/utils/double_utils.dart';
+import 'package:the_technology_maker/widgtes/heading.dart';
 
 import '../widgtes/app_bar.dart';
+import '../widgtes/asset_image_view.dart';
 import '../widgtes/bottom_bar.dart';
 import '../widgtes/carousel_indicator.dart';
+import '../widgtes/games_category_view.dart';
 import '../widgtes/jackpot_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,31 +54,8 @@ class _HomePageState extends State<HomePage> {
                 controller: _carouselController,
                 itemCount: AppAssetConstants.kBannerImages.length,
                 itemBuilder: (context, index) {
-                  return CachedNetworkImage(
-                    imageUrl: AppAssetConstants.kBannerImages[index],
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ),
-                    ),
-                    placeholder: (context, url) => Center(
-                      child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.image_not_supported_rounded),
+                  return AppImageView(
+                    fileName: AppAssetConstants.kBannerImages[index],
                   );
                 },
               ),
@@ -105,11 +86,23 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ...AppStringConstants.kLanguages
                       .map(
-                        (e) => Text(e),
+                        (e) => Text(
+                          e,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: AppColorConstants.orange),
+                        ),
                       )
                       .toList(),
                   InkWell(
-                    child: const Text("..."),
+                    child: Text(
+                      "...",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: AppColorConstants.orange),
+                    ),
                     onTap: () {},
                   )
                 ],
@@ -126,30 +119,101 @@ class _HomePageState extends State<HomePage> {
             14.0.padding(),
             const JackPotView(),
             14.0.padding(),
-            Center(
-              child: ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (bounds) => LinearGradient(
-                  colors: [AppColorConstants.yellow, Colors.white38],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ).createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                ),
-                child: Text(
-                  "LIVE WITHDRAWAL",
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
-                ),
-              ),
-            ),
-            8.0.padding(),
-            Center(
+            const HeadingView(title: AppStringConstants.kLiveUpdate),
+            14.0.padding(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Container(
-                width: size.width * 0.65,
-                height: 4,
-                color: AppColorConstants.yellow,
+                height: size.longestSide * 0.25,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.yellow, Colors.white, Colors.yellow],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.deepPurple,
+                          Colors.purple,
+                          Colors.deepPurple
+                        ],
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceEvenly,
+                      runAlignment: WrapAlignment.spaceEvenly,
+                      children: AppStringConstants.kUsersList
+                          .map(
+                            (e) => SizedBox(
+                              width: (size.width * 0.5) - 30,
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.only(
+                                  left: 0.0,
+                                  right: 0.0,
+                                ),
+                                leading: Container(
+                                  height: 52,
+                                  width: 52,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.orange, width: 2.5),
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: const Icon(
+                                    Icons.people_alt,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                ),
+                                horizontalTitleGap: 4,
+                                title: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: e,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                      const TextSpan(
+                                        text: " ₹ ",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.orange),
+                                      ),
+                                      TextSpan(
+                                        text: "${Random().nextInt(50000)}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  "${Random().nextInt(55)} "
+                                  "second ago",
+                                  style: const TextStyle(
+                                    color: Colors.white38,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                ),
               ),
             ),
             14.0.padding(),
@@ -160,6 +224,10 @@ class _HomePageState extends State<HomePage> {
                 playingBarColor: AppColorConstants.orange,
               ),
             ),
+            14.0.padding(),
+            const HeadingView(title: AppStringConstants.kGames),
+            14.0.padding(),
+            const GamesCategory(title: 'Popular games',count: 7),
           ],
         ),
       ),

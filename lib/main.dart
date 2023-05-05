@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Khelo.com',
       theme: ThemeData(
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.yellow,
           scaffoldBackgroundColor: Colors.black,
           appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
           bottomAppBarTheme: const BottomAppBarTheme(color: Colors.black)),

@@ -31,7 +31,7 @@ class CommonBottomBar extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      AssetImageView(
+                      AppImageView(
                         fileName: AppAssetConstants.kBottomNavIcons[0],
                         fit: BoxFit.cover,
                         height: 36,
@@ -54,7 +54,7 @@ class CommonBottomBar extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AssetImageView(
+                  AppImageView(
                     fileName: AppAssetConstants.kBottomNavIcons[1],
                     fit: BoxFit.cover,
                     height: 46,
@@ -78,7 +78,7 @@ class CommonBottomBar extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AssetImageView(
+                  AppImageView(
                     fileName: AppAssetConstants.kBottomNavIcons[2],
                     fit: BoxFit.cover,
                     height: 46,
@@ -109,7 +109,7 @@ class CommonBottomBar extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        AssetImageView(
+                        AppImageView(
                           fileName: AppAssetConstants.kBottomNavIcons[3],
                           fit: BoxFit.cover,
                           height: 36,

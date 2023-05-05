@@ -13,4 +13,14 @@ class AppStringConstants {
     'Live Casino',
     'Register',
   ];
+
+  static const List<String> kUsersList = [
+    'Meher',
+    'Ira',
+    'Anushka',
+    'Vivan',
+  ];
+
+  static const String kLiveUpdate = "LIVE WITHDRAWAL";
+  static const String kGames = "GAMES";
 }
