@@ -91,18 +91,85 @@ class _GamesCategoryState extends State<GamesCategory> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: AppImageView(
-                            fileName:
-                                "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                          child: Container(
+                            clipBehavior: Clip.hardEdge,
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8),
+                              ),
+                            ),
+                            child: AppImageView(
+                              fileName:
+                                  "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                            ),
                           ),
                         ),
                         Container(
                           height: (size.width * 0.08),
+                          width: double.infinity,
                           decoration: const BoxDecoration(
                             color: Colors.deepPurple,
                             borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                            ),
+                          ),
+                          child: Center(
+                            child: RichText(
+                              text: const TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "Min.",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: "₹",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.orange),
+                                  ),
+                                  TextSpan(
+                                    text: "100",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: " | ",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.red),
+                                  ),
+                                  TextSpan(
+                                    text: "Max.",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: "₹",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.orange),
+                                  ),
+                                  TextSpan(
+                                    text: "100k",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         )

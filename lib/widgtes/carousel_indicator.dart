@@ -35,10 +35,19 @@ class _CarouselIndicatorState extends State<CarouselIndicator> {
           scrollDirection: Axis.horizontal,
           itemCount: AppAssetConstants.kBannerImages.length,
           itemBuilder: (context, index) {
-            return Container(
-              width: 20,
-              height: 4,
-              color: currentIndex == index ? Colors.yellow : Colors.grey,
+            return GestureDetector(
+              onTap: () {
+                widget.controller.animateToPage(
+                  index,
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.easeIn,
+                );
+              },
+              child: Container(
+                width: 20,
+                height: 4,
+                color: currentIndex == index ? Colors.yellow : Colors.grey,
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) {

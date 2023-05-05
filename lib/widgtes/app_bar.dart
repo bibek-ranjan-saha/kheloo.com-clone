@@ -3,6 +3,7 @@ import 'package:the_technology_maker/utils/double_utils.dart';
 
 import '../constants/asset_constants.dart';
 import '../constants/color_constants.dart';
+import '../utils/utils.dart';
 
 class CommonAppBar extends StatelessWidget {
   const CommonAppBar({Key? key}) : super(key: key);
@@ -20,7 +21,11 @@ class CommonAppBar extends StatelessWidget {
       ),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            showSnackBar(
+                context: context,
+                text: "Promotion has been clicked");
+          },
           child: Column(
             children: [
               Expanded(
@@ -41,7 +46,11 @@ class CommonAppBar extends StatelessWidget {
         ),
         12.0.padding(),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            showSnackBar(
+                context: context,
+                text: "Login has been clicked");
+          },
           style: TextButton.styleFrom(
             backgroundColor: AppColorConstants.orange,
             shape: const RoundedRectangleBorder(

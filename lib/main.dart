@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Khelo.com',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.yellow,
           scaffoldBackgroundColor: Colors.black,
